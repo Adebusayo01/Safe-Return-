@@ -1,4 +1,4 @@
-# Runs on every push and pull request: lint, type-check and production build.
+# Runs on every push and pull request: lint, type-check, tests and production build.
 name: CI
 
 on:
@@ -33,6 +33,9 @@ jobs:
 
       - name: Type-check
         run: npm run typecheck
+
+      - name: Tests
+        run: npm test
 
       - name: Build
         run: npm run build

@@ -98,3 +98,60 @@ export function getServerEnv(): ServerEnv {
 export function getAppBaseUrl(): string {
   return parseAppBaseUrl(readOptional("APP_BASE_URL"), resolveDeploymentEnvironment());
 }
+
+// ---------------------------------------------------------------------------
+// Messaging (P1)
+// ---------------------------------------------------------------------------
+
+export type MessagingConfig =
+  | { channel: "fake" }
+  | {
+      channel: "whatsapp";
+      accessToken: string;
+      phoneNumberId: string;
+      apiVersion: string;
+    };
+
+const DEFAULT_GRAPH_API_VERSION = "v24.0";
+
+/**
+ * Which message channel to use. Read only when a message is about to be sent,
+ * so a missing value never breaks unrelated pages.
+ *
+ * Safety rules:
+ *  - Production must choose explicitly, and may not use the fake channel:
+ *    a fake channel there would silently swallow real safety alerts.
+ *  - Everywhere else the default is "fake".
+ */
+export function getMessagingConfig(): MessagingConfig {
+  const env = resolveDeploymentEnvironment();
+  const raw = readOptional("MESSAGE_CHANNEL");
+  const channel = raw ?? (env === "production" ? null : "fake");
+
+  if (channel === null) {
+    throw new EnvConfigError("MESSAGE_CHANNEL must be set in production (expected \"whatsapp\").");
+  }
+  if (channel === "fake") {
+    if (env === "production") {
+      throw new EnvConfigError("MESSAGE_CHANNEL=fake is not allowed in production.");
+    }
+    return { channel: "fake" };
+  }
+  if (channel === "whatsapp") {
+    const accessToken = readOptional("WHATSAPP_ACCESS_TOKEN");
+    const phoneNumberId = readOptional("WHATSAPP_PHONE_NUMBER_ID");
+    const missing = [
+      accessToken ? null : "WHATSAPP_ACCESS_TOKEN",
+      phoneNumberId ? null : "WHATSAPP_PHONE_NUMBER_ID",
+    ].filter((name): name is string => name !== null);
+    if (!accessToken || !phoneNumberId) {
+      throw new EnvConfigError(`MESSAGE_CHANNEL=whatsapp requires: ${missing.join(", ")}.`);
+    }
+    const apiVersion = readOptional("WHATSAPP_GRAPH_API_VERSION") ?? DEFAULT_GRAPH_API_VERSION;
+    if (!/^v\d+\.\d+$/.test(apiVersion)) {
+      throw new EnvConfigError("WHATSAPP_GRAPH_API_VERSION must look like v24.0.");
+    }
+    return { channel: "whatsapp", accessToken, phoneNumberId, apiVersion };
+  }
+  throw new EnvConfigError(`MESSAGE_CHANNEL must be "fake" or "whatsapp", got "${channel}".`);
+}

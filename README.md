@@ -3,9 +3,13 @@
 A mobile (PWA) and WhatsApp-based platform for journey monitoring, automated safety
 check-ins and trusted-contact alerts. Initial launch area: Lagos, Nigeria.
 
-> **Status: Phase P0 (Foundations).** The project skeleton, tooling and deployment
-> setup are in place. No product features exist yet. See
-> [`docs/engineering-plan.md`](docs/engineering-plan.md) for the full roadmap.
+> **Status: P0 complete; P1 partly built (no database yet).** The messaging layer
+> (channel interface, fake provider, WhatsApp adapter, webhook parsing) is built and
+> tested, but **no product feature works yet**. Accounts, journeys, scheduling and
+> reliable notifications all need the Neon database, which is postponed. See
+> [`docs/database-readiness.md`](docs/database-readiness.md) for exactly what works
+> and what doesn't, and [`docs/engineering-plan.md`](docs/engineering-plan.md) for
+> the roadmap.
 
 ## Tech stack
 
@@ -57,11 +61,13 @@ the response.
 | `npm run dev` | Starts the development server with hot reload |
 | `npm run lint` | Runs ESLint (code-quality rules). Fails on any warning |
 | `npm run typecheck` | Generates Next.js route types, then runs the TypeScript compiler without emitting files |
-| `npm run check` | Runs `lint` and `typecheck` together. Run this before every commit |
+| `npm test` | Runs the automated tests once (Vitest) |
+| `npm run test:watch` | Re-runs tests as you edit |
+| `npm run check` | Runs `lint`, `typecheck` and `test`. Run this before every commit |
 | `npm run build` | Creates a production build, the same thing Vercel does |
 | `npm run start` | Serves the production build locally (run `build` first) |
 
-GitHub Actions runs `lint`, `typecheck` and `build` on every push and pull request
+GitHub Actions runs `lint`, `typecheck`, `test` and `build` on every push and pull request
 (`.github/workflows/ci.yml`).
 
 ## Environment variables
@@ -81,15 +87,17 @@ All server code reads configuration through `src/server/env.ts`, which validates
 |---|---|---|
 | `DATABASE_URL` | P0 (optional) | Neon **pooled** connection string |
 | `APP_BASE_URL` | P3 | Public URL of the app. On Vercel it falls back to the deployment URL |
+| `MESSAGE_CHANNEL` | P1 | `fake` (default outside production) or `whatsapp`. Production refuses `fake` |
 | Others | Later phases | Listed, commented out, in `.env.example` |
 
 ## Project structure
 
 ```
 .devcontainer/          Codespaces configuration (Node 22, ESLint extension, port 3000)
-.github/workflows/      CI: lint, type-check, build
+.github/workflows/      CI: lint, type-check, tests, build
 docs/                   Engineering plan and design notes
 public/                 Static files served as-is (icons, PWA manifest later)
+test/stubs/             Test-only stand-ins (e.g. for the `server-only` marker)
 src/
   app/                  Next.js App Router: pages and API routes only (keep these thin)
     api/health/         GET /api/health: liveness and database check
@@ -97,8 +105,9 @@ src/
     auth/               P2: phone login, sessions
     contacts/           P3: trusted contacts, consent, STOP handling
     journeys/           P4–P5: journey state machine, check-ins
-    notifications/      P1: notification records, delivery states, channels
+    notifications/      P1: message channels (fake, WhatsApp), templates, delivery rules
     admin/              P8: operations screens
+  lib/                  Small shared helpers (e.g. the Clock used by tests)
   server/               Shared server-only code
     env.ts              Validated environment configuration
     db/client.ts        Neon connection and health check
