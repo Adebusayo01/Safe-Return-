@@ -1,0 +1,38 @@
+{
+  // GitHub Codespaces / Dev Containers configuration for SafeReturn.
+  // Docs: https://containers.dev/implementors/json_reference/
+  "name": "SafeReturn",
+  // Node.js 22 + TypeScript tooling, maintained by Microsoft.
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+
+  // Install exact dependency versions from package-lock.json once the container is created.
+  "postCreateCommand": "npm ci",
+
+  // The Next.js dev server port. Codespaces keeps forwarded ports PRIVATE by default.
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": { "label": "SafeReturn (Next.js)", "onAutoForward": "notify" }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint"],
+      "settings": {
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" }
+      }
+    },
+    "codespaces": {
+      "openFiles": ["README.md"]
+    }
+  },
+
+  // Codespaces asks for these secrets when a codespace is created and exposes
+  // them as environment variables, so no .env.local file is needed.
+  "secrets": {
+    "DATABASE_URL": {
+      "description": "Neon POOLED connection string for your `dev` database branch (optional in P0).",
+      "documentationUrl": "https://neon.com/docs/connect/connect-from-any-app"
+    }
+  }
+}
