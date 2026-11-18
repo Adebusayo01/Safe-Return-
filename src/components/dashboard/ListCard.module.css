@@ -1,0 +1,82 @@
+/* Shared styles for card lists (contacts, recent journeys). */
+.list {
+  display: grid;
+  container-type: inline-size;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 4.25rem;
+  padding: var(--space-3) var(--space-5);
+}
+
+.row + .row {
+  border-top: var(--border-width) solid var(--color-line-subtle);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.primary {
+  font-weight: var(--weight-semibold);
+  overflow-wrap: break-word;
+}
+
+.secondary {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.trailing {
+  flex-shrink: 0;
+}
+
+/* Very narrow cards (small phones): move the status badge under the name. */
+@container (max-width: 20rem) {
+  .row {
+    flex-wrap: wrap;
+    row-gap: var(--space-1);
+  }
+
+  .body {
+    flex-basis: calc(100% - 2.75rem - var(--space-3));
+  }
+
+  .trailing {
+    margin-left: calc(2.75rem + var(--space-3));
+  }
+}
+
+.footer {
+  padding: var(--space-3) var(--space-5) var(--space-4);
+  border-top: var(--border-width) solid var(--color-line-subtle);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.iconBubble {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  color: var(--brand-charcoal);
+}
+
+.bubbleSafe {
+  background: var(--brand-sage);
+}
+
+.bubbleLate {
+  background: var(--brand-wheat);
+}
+
+.bubbleNeutral {
+  background: transparent;
+  border: var(--border-width) solid var(--color-line-strong);
+}

@@ -1,0 +1,37 @@
+.card {
+  position: relative;
+  min-width: 0;
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+@media (min-width: 40rem) {
+  .card {
+    padding: var(--space-6);
+  }
+}
+
+.plain {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-line-subtle);
+}
+
+.sage {
+  background: var(--color-surface-sage);
+  color: var(--brand-charcoal);
+}
+
+.wheat {
+  background: var(--color-surface-wheat);
+  color: var(--brand-charcoal);
+}
+
+.forest {
+  background: var(--color-surface-forest);
+  color: var(--color-on-surface-forest);
+}
+
+.flush {
+  padding: 0;
+  overflow: hidden;
+}

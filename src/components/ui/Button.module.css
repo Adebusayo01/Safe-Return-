@@ -1,0 +1,112 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-target);
+  padding: var(--space-3) var(--space-6);
+  border: var(--border-width-strong) solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button[aria-disabled="true"],
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Sizes */
+.md {
+  min-height: var(--tap-target);
+}
+
+.lg {
+  min-height: 3.5rem;
+  padding-inline: var(--space-7);
+  font-size: var(--text-lg);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Variants */
+.primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.primary:hover {
+  background: color-mix(in srgb, var(--brand-forest) 88%, var(--brand-charcoal));
+}
+
+.secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.secondary:hover {
+  background: color-mix(in srgb, var(--brand-forest) 8%, transparent);
+}
+
+/* For use on forest-green surfaces. */
+.inverse {
+  background: var(--brand-ivory);
+  color: var(--brand-forest);
+}
+
+.inverse:hover {
+  background: var(--brand-wheat);
+}
+
+.inverse:focus-visible {
+  outline-color: var(--brand-ivory);
+}
+
+/* For urgent actions such as "Need help". Terracotta fill, charcoal text (5.1:1). */
+.urgent {
+  background: var(--color-surface-terracotta);
+  color: var(--brand-charcoal);
+}
+
+.urgent:hover {
+  background: color-mix(in srgb, var(--brand-terracotta) 88%, var(--brand-charcoal));
+}
+
+/* Text-only action, e.g. "See all". Still a full-size tap target. */
+.quiet {
+  background: transparent;
+  color: var(--color-primary);
+  padding-inline: var(--space-3);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.quiet:hover {
+  text-decoration-thickness: 2px;
+}
+
+.icon {
+  flex-shrink: 0;
+}

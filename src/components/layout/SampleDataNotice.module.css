@@ -1,0 +1,20 @@
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-wheat);
+  color: var(--brand-charcoal);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 0.05em;
+}
+
+.notice strong {
+  font-weight: var(--weight-semibold);
+}

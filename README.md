@@ -100,10 +100,19 @@ public/                 Static files served as-is (icons, PWA manifest later)
 test/stubs/             Test-only stand-ins (e.g. for the `server-only` marker)
 src/
   app/                  Next.js App Router: pages and API routes only (keep these thin)
+    (app)/              App screens inside the shared navigation (dashboard at /)
+    (app)/design-system Living reference of tokens and components (/design-system)
     api/health/         GET /api/health: liveness and database check
+  components/
+    ui/                 Design-system components: Button, TextField, Card, Badge, Avatar, Icon…
+    layout/             App shell, navigation, sample-data notice
+    brand/              Logo (the mark is a TEMPORARY placeholder until a concept is approved)
+    dashboard/          Dashboard sections
+  styles/tokens.css     Design tokens: every colour, font size, space and radius
   modules/              Product features, one folder per area
     auth/               P2: phone login, sessions
     contacts/           P3: trusted contacts, consent, STOP handling
+    dashboard/          Dashboard data loading (sample data until Neon is connected)
     journeys/           P4–P5: journey state machine, check-ins
     notifications/      P1: message channels (fake, WhatsApp), templates, delivery rules
     admin/              P8: operations screens

@@ -1,0 +1,130 @@
+/*
+ * SafeReturn design tokens.
+ *
+ * Every colour, font, size and spacing value used in the interface is defined
+ * here, once. Components refer to these names (e.g. var(--color-primary)),
+ * never to raw values, so the visual direction can be refined in one place.
+ *
+ * Brand palette (approved): forest green, warm ivory, muted sage, earthy
+ * terracotta, charcoal, soft wheat.
+ *
+ * Contrast rules (WCAG 2.2, checked against the palette):
+ *   Text-safe:  charcoal or forest on ivory / sage / wheat;
+ *               ivory or wheat on forest; ivory on charcoal.
+ *   NOT for text on ivory: terracotta (2.4:1) and sage (1.8:1).
+ *   Use those two as fills behind charcoal text, or for decoration.
+ */
+
+:root {
+  /* ---- Brand palette (raw values: use the semantic names below in components) ---- */
+  --brand-forest: #244c3b;
+  --brand-ivory: #f5f0e5;
+  --brand-sage: #a9bba5;
+  --brand-terracotta: #d68a68;
+  --brand-charcoal: #292d28;
+  --brand-wheat: #d7c995;
+
+  /* ---- Semantic colours ---- */
+  --color-bg: var(--brand-ivory);
+  --color-text: var(--brand-charcoal);
+  /* Secondary text: charcoal at 78% over ivory (contrast about 7:1). */
+  --color-text-muted: color-mix(in srgb, var(--brand-charcoal) 78%, var(--brand-ivory));
+
+  --color-primary: var(--brand-forest);
+  --color-on-primary: var(--brand-ivory);
+
+  --color-surface: var(--brand-ivory);
+  --color-surface-sage: var(--brand-sage);
+  --color-surface-wheat: var(--brand-wheat);
+  --color-surface-terracotta: var(--brand-terracotta);
+  --color-surface-forest: var(--brand-forest);
+  --color-on-surface-forest: var(--brand-ivory);
+  --color-on-surface-forest-muted: var(--brand-wheat);
+
+  /* Lines: tints of charcoal over ivory.
+     -strong meets 3:1 for input borders; -subtle is for decorative dividers only. */
+  --color-line-strong: color-mix(in srgb, var(--brand-charcoal) 62%, var(--brand-ivory));
+  --color-line-subtle: color-mix(in srgb, var(--brand-charcoal) 14%, var(--brand-ivory));
+
+  --color-focus-ring: var(--brand-forest);
+  --color-accent: var(--brand-terracotta);
+
+  /* ---- Typography ---- */
+  --font-family-display: var(--font-display), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-family-sans: var(--font-sans), "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Display sizes scale smoothly between small phones and large screens.
+     Cormorant has a small x-height, so display sizes run larger than body sizes. */
+  --text-display-xl: clamp(2.5rem, 2.05rem + 2.2vw, 3.75rem);
+  --text-display-lg: clamp(2rem, 1.75rem + 1.25vw, 2.75rem);
+  --text-display-md: clamp(1.625rem, 1.5rem + 0.6vw, 2rem);
+  --text-display-sm: 1.375rem;
+
+  /* Interface text: never below 16px for inputs (prevents iPhone zoom on focus). */
+  --text-lg: 1.125rem;
+  --text-md: 1rem;
+  --text-sm: 0.9375rem;
+  --text-xs: 0.8125rem;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-body: 1.55;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --tracking-eyebrow: 0.12em;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 2.5rem;
+  --space-9: 3rem;
+  --space-10: 4rem;
+
+  /* ---- Layout ---- */
+  --page-gutter: 1.25rem;
+  --page-max-width: 44rem;
+  --page-max-width-wide: 72rem;
+  --nav-bottom-height: 4.25rem;
+  --nav-side-width: 15rem;
+  /* Minimum touch target (Apple recommends 44pt; we use 48px). */
+  --tap-target: 3rem;
+
+  /* ---- Shape ---- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.375rem;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --border-width-strong: 1.5px;
+
+  /* ---- Motion ---- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---- Layers ---- */
+  --z-nav: 20;
+  --z-banner: 30;
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --page-gutter: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+  }
+}

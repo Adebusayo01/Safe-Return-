@@ -1,0 +1,106 @@
+.card {
+  display: grid;
+  gap: var(--space-5);
+  border-color: color-mix(in srgb, var(--brand-forest) 35%, var(--brand-ivory));
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.started {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.destination {
+  font-size: var(--text-display-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--brand-forest);
+}
+
+.area {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.times {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.time {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--brand-sage) 40%, var(--brand-ivory));
+}
+
+.timeLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.timeValue {
+  margin-top: var(--space-1);
+  font-family: var(--font-family-display);
+  font-size: var(--text-display-md);
+  font-weight: var(--weight-bold);
+  line-height: 1.05;
+  color: var(--brand-charcoal);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.details {
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.detailIcon {
+  margin-top: 0.1rem;
+  color: var(--brand-forest);
+}
+
+.detail dt {
+  font-weight: var(--weight-semibold);
+}
+
+.detail dd {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.empty {
+  display: grid;
+  gap: var(--space-2);
+  border-style: dashed;
+  border-color: var(--color-line-strong);
+}
+
+.emptyTitle {
+  font-family: var(--font-family-display);
+  font-size: var(--text-display-md);
+  font-weight: var(--weight-semibold);
+}
+
+.emptyText {
+  color: var(--color-text-muted);
+}

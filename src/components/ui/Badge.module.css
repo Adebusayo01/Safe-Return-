@@ -1,0 +1,42 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.2em 0.7em;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--brand-charcoal);
+}
+
+.dot {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.forest {
+  background: var(--brand-forest);
+  color: var(--brand-ivory);
+}
+
+.sage {
+  background: var(--brand-sage);
+}
+
+.wheat {
+  background: var(--brand-wheat);
+}
+
+.terracotta {
+  background: var(--brand-terracotta);
+}
+
+.outline {
+  background: transparent;
+  border: var(--border-width) solid var(--color-line-strong);
+}

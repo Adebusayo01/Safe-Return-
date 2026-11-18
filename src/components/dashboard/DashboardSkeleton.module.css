@@ -1,0 +1,42 @@
+.skeleton {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.block {
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--brand-charcoal) 7%, var(--brand-ivory));
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.line {
+  height: 1rem;
+  width: 40%;
+  border-radius: var(--radius-sm);
+}
+
+.title {
+  height: 3rem;
+  width: 75%;
+  border-radius: var(--radius-sm);
+}
+
+.hero {
+  height: 20rem;
+}
+
+.card {
+  height: 14rem;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    animation: none;
+  }
+}

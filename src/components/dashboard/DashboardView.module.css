@@ -1,0 +1,17 @@
+.page {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 64rem) {
+  .page {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-7);
+    row-gap: var(--space-8);
+    align-items: start;
+  }
+
+  .full {
+    grid-column: 1 / -1;
+  }
+}

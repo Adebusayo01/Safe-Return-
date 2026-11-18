@@ -1,0 +1,146 @@
+.page {
+  display: grid;
+  gap: var(--space-9);
+}
+
+.intro {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.h1 {
+  font-size: var(--text-display-xl);
+  color: var(--brand-forest);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@media (min-width: 40rem) {
+  .swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.swatch {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: var(--border-width) solid var(--color-line-subtle);
+}
+
+.chip {
+  height: 5rem;
+}
+
+.swatchText {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+.swatchName {
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+}
+
+.typeRow {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-line-subtle);
+}
+
+.typeMeta {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.forestPanel {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--brand-forest);
+}
+
+.icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: var(--space-3);
+}
+
+.iconCell {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-1);
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid var(--color-line-subtle);
+  color: var(--brand-forest);
+  font-size: var(--text-xs);
+}
+
+.iconName {
+  color: var(--color-text-muted);
+}
+
+.spaceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.spaceBar {
+  height: 0.75rem;
+  border-radius: 2px;
+  background: var(--brand-sage);
+}
+
+.cards {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 40rem) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Keep token names like --brand-forest on one line. */
+.page code {
+  white-space: nowrap;
+  font-size: 0.95em;
+}
